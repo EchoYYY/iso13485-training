@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ISO 13485 Management Training — Genea Biomedx</title>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap');
+
+  :root {
+    --navy:   #1F3864;
+    --blue:   #2E5FA3;
+    --teal:   #028090;
+    --gold:   #C9A84C;
+    --lgrey:  #F4F6F8;
+    --dgrey:  #4A4A5A;
+    --lblue:  #BDD7EE;
+    --white:  #FFFFFF;
+    --red:    #C00000;
+    --green:  #1A7A4A;
+    --pass:   #E8F5E9;
+    --fail:   #FFEBEE;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: var(--lgrey);
+    color: var(--dgrey);
+    min-height: 100vh;
+  }
+
+  /* ── Header ── */
+  .site-header {
+    background: var(--navy);
+    padding: 0;
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 3px 16px rgba(0,0,0,.3);
+  }
+  .header-top {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 40px;
+  }
+  .header-top h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem; color: var(--white); letter-spacing: .04em;
+  }
+  .header-top .badge {
+    background: var(--gold); color: var(--navy);
+    font-size: .75rem; font-weight: 700; padding: 4px 14px;
+    border-radius: 20px; letter-spacing: .06em; text-transform: uppercase;
+  }
+  .header-nav {
+    background: var(--blue);
+    display: flex; gap: 0; overflow-x: auto;
+  }
+  .nav-tab {
+    padding: 9px 22px; color: rgba(255,255,255,.7);
+    font-size: .82rem; font-weight: 600; cursor: pointer;
+    border-bottom: 3px solid transparent; white-space: nowrap;
+    transition: all .2s; user-select: none;
+  }
+  .nav-tab:hover { color: #fff; border-bottom-color: rgba(255,255,255,.4); }
+  .nav-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+  /* ── Progress bar ── */
+  .progress-bar-wrap { height: 4px; background: rgba(255,255,255,.15); }
+  .progress-bar-fill { height: 100%; background: var(--gold); transition: width .4s ease; }
+
+  /* ── Content wrapper ── */
+  .content { max-width: 960px; margin: 0 auto; padding: 36px 24px 80px; }
+
+  /* ── Section panels ── */
+  .section-panel { display: none; }
+  .section-panel.active { display: block; animation: fadeIn .35s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+  /* ── Cards ── */
+  .card {
+    background: var(--white); border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.08); margin-bottom: 24px; overflow: hidden;
+  }
+  .card-header {
+    background: var(--navy); color: var(--white);
+    padding: 14px 22px; display: flex; align-items: center; gap: 14px;
+  }
+  .card-header .clause-badge {
+    background: var(--gold); color: var(--navy);
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem; font-weight: 700;
+    padding: 4px 12px; border-radius: 6px; flex-shrink: 0;
+  }
+  .card-header h2 { font-size: 1.05rem; font-weight: 600; }
+  .card-body { padding: 20px 22px; }
+  .card-body p { line-height: 1.7; margin-bottom: 12px; font-size: .95rem; }
+  .card-body ul { margin: 10px 0 12px 18px; }
+  .card-body ul li { margin-bottom: 6px; line-height: 1.6; font-size: .93rem; }
+
+  .audit-box {
+    border-left: 4px solid var(--red); background: #FFF5F5;
+    padding: 12px 16px; border-radius: 0 8px 8px 0; margin-top: 14px;
+  }
+  .audit-box .audit-label {
+    font-size: .78rem; font-weight: 700; color: var(--red);
+    text-transform: uppercase; letter-spacing: .06em; margin-bottom: 6px;
+  }
+  .audit-box p { font-size: .88rem; color: #7a2020; margin: 0; }
+
+  .fix-box {
+    border-left: 4px solid var(--green); background: #F0FFF4;
+    padding: 12px 16px; border-radius: 0 8px 8px 0; margin-top: 10px;
+  }
+  .fix-box .fix-label {
+    font-size: .78rem; font-weight: 700; color: var(--green);
+    text-transform: uppercase; letter-spacing: .06em; margin-bottom: 6px;
+  }
+  .fix-box p { font-size: .88rem; color: #1a4a2a; margin: 0; }
+
+  /* ── Hero ── */
+  .hero {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 60%, var(--teal) 100%);
+    color: var(--white); border-radius: 12px; padding: 44px 40px; margin-bottom: 30px;
+    position: relative; overflow: hidden;
+  }
+  .hero::after {
+    content: ''; position: absolute; right: -40px; top: -40px;
+    width: 260px; height: 260px; border-radius: 50%;
+    background: rgba(255,255,255,.05);
+  }
+  .hero .eyebrow {
+    font-size: .78rem; letter-spacing: .14em; color: var(--gold);
+    text-transform: uppercase; font-weight: 700; margin-bottom: 10px;
+  }
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: 2.1rem; margin-bottom: 12px; }
+  .hero p { font-size: 1rem; color: rgba(255,255,255,.82); max-width: 620px; line-height: 1.7; }
+  .hero-meta {
+    display: flex; gap: 28px; margin-top: 22px; flex-wrap: wrap;
+  }
+  .hero-meta .meta-item { display: flex; flex-direction: column; }
+  .hero-meta .meta-label { font-size: .72rem; color: rgba(255,255,255,.5); text-transform: uppercase; letter-spacing: .08em; }
+  .hero-meta .meta-value { font-size: 1.1rem; font-weight: 700; color: var(--gold); }
+
+  /* ── Buttons ── */
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 11px 28px; border-radius: 8px; font-size: .93rem; font-weight: 700;
+    cursor: pointer; border: none; transition: all .2s; letter-spacing: .03em;
+  }
+  .btn-primary { background: var(--blue); color: var(--white); }
+  .btn-primary:hover { background: var(--navy); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(0,0,0,.18); }
+  .btn-gold { background: var(--gold); color: var(--navy); }
+  .btn-gold:hover { background: #b8952e; }
+  .btn-green { background: var(--green); color: var(--white); }
+  .btn-green:hover { background: #115c35; }
+  .btn-outline { background: transparent; color: var(--blue); border: 2px solid var(--blue); }
+  .btn-outline:hover { background: var(--blue); color: var(--white); }
+  .btn:disabled { opacity: .45; cursor: not-allowed; transform: none; }
+
+  /* ── Quiz ── */
+  .quiz-header {
+    background: var(--navy); color: var(--white); border-radius: 10px 10px 0 0;
+    padding: 20px 28px; display: flex; align-items: center; justify-content: space-between;
+  }
+  .quiz-header h2 { font-family: 'Playfair Display', serif; font-size: 1.35rem; }
+  .quiz-header .score-badge {
+    background: var(--gold); color: var(--navy);
+    font-weight: 700; padding: 6px 18px; border-radius: 20px; font-size: .9rem;
+  }
+  .quiz-body { background: var(--white); border-radius: 0 0 10px 10px; padding: 0; overflow: hidden; }
+
+  .question-block {
+    padding: 24px 28px; border-bottom: 1px solid #e8ecf0;
+    transition: background .2s;
+  }
+  .question-block:last-child { border-bottom: none; }
+  .question-block.answered-correct { background: #F0FFF4; }
+  .question-block.answered-wrong { background: #FFF5F5; }
+
+  .q-number {
+    font-size: .75rem; font-weight: 700; color: var(--blue);
+    text-transform: uppercase; letter-spacing: .1em; margin-bottom: 8px;
+  }
+  .q-text { font-size: 1rem; font-weight: 600; color: var(--navy); margin-bottom: 16px; line-height: 1.5; }
+  .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  @media (max-width: 620px) { .options-grid { grid-template-columns: 1fr; } }
+
+  .option-btn {
+    padding: 11px 16px; border-radius: 8px; border: 2px solid #d0dcea;
+    background: #F7FAFD; cursor: pointer; text-align: left;
+    font-size: .91rem; font-family: 'Source Sans 3', sans-serif;
+    transition: all .15s; color: var(--dgrey); line-height: 1.4;
+  }
+  .option-btn:hover:not(:disabled) { border-color: var(--blue); background: #EEF5FF; color: var(--navy); }
+  .option-btn.selected { border-color: var(--blue); background: #EEF5FF; font-weight: 600; }
+  .option-btn.correct { border-color: var(--green); background: #E8F5E9; color: var(--green); font-weight: 700; }
+  .option-btn.wrong { border-color: var(--red); background: #FFEBEE; color: var(--red); text-decoration: line-through; }
+  .option-btn:disabled { cursor: default; }
+
+  .q-feedback {
+    margin-top: 12px; padding: 10px 14px; border-radius: 6px;
+    font-size: .88rem; display: none;
+  }
+  .q-feedback.show { display: block; }
+  .q-feedback.pass { background: #E8F5E9; color: var(--green); border-left: 3px solid var(--green); }
+  .q-feedback.fail { background: #FFEBEE; color: var(--red); border-left: 3px solid var(--red); }
+
+  /* ── Result panel ── */
+  .result-panel {
+    display: none; background: var(--white); border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0,0,0,.12); overflow: hidden; margin-top: 24px;
+  }
+  .result-panel.show { display: block; animation: fadeIn .4s ease; }
+  .result-header {
+    padding: 28px 36px; text-align: center;
+  }
+  .result-header.pass-bg { background: linear-gradient(135deg, var(--green) 0%, #2ea05a 100%); }
+  .result-header.fail-bg { background: linear-gradient(135deg, var(--red) 0%, #e53030 100%); }
+  .result-header .result-icon { font-size: 3rem; margin-bottom: 8px; }
+  .result-header h2 { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--white); margin-bottom: 8px; }
+  .result-header .result-score { font-size: 3.5rem; font-weight: 700; color: var(--white); }
+  .result-header .result-sub { color: rgba(255,255,255,.82); font-size: 1rem; margin-top: 4px; }
+  .result-body { padding: 28px 36px; }
+
+  /* ── Signature ── */
+  .sig-section {
+    border: 2px solid var(--gold); border-radius: 10px; padding: 28px;
+    margin-top: 24px; background: #FFFDF5;
+  }
+  .sig-section h3 {
+    font-family: 'Playfair Display', serif; font-size: 1.2rem;
+    color: var(--navy); margin-bottom: 18px; display: flex; align-items: center; gap: 10px;
+  }
+  .sig-section h3 span { color: var(--gold); }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  @media (max-width: 620px) { .form-row { grid-template-columns: 1fr; } }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group label { font-size: .8rem; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: .06em; }
+  .form-group input {
+    padding: 10px 14px; border-radius: 7px; border: 2px solid #d0dcea;
+    font-size: .95rem; font-family: 'Source Sans 3', sans-serif;
+    transition: border .2s; background: var(--white);
+  }
+  .form-group input:focus { border-color: var(--blue); outline: none; }
+
+  .sig-canvas-wrap {
+    border: 2px dashed var(--gold); border-radius: 8px;
+    background: var(--white); margin: 16px 0; position: relative;
+    overflow: hidden; height: 130px;
+  }
+  #sig-canvas { width: 100%; height: 100%; cursor: crosshair; display: block; touch-action: none; }
+  .sig-canvas-label {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+    color: #bbb; font-size: .9rem; pointer-events: none;
+    transition: opacity .2s; text-align: center;
+  }
+  .sig-actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .btn-clear-sig {
+    padding: 7px 18px; border-radius: 6px; border: 2px solid #d0dcea;
+    background: transparent; cursor: pointer; font-size: .85rem; font-weight: 600; color: var(--dgrey);
+  }
+  .btn-clear-sig:hover { border-color: var(--red); color: var(--red); }
+
+  /* ── Certificate ── */
+  .certificate {
+    display: none; margin-top: 28px;
+    border: 3px solid var(--gold); border-radius: 14px; overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,.18);
+  }
+  .certificate.show { display: block; animation: fadeIn .5s ease; }
+  .cert-top {
+    background: var(--navy); padding: 28px 36px; text-align: center;
+  }
+  .cert-top .cert-org {
+    font-size: .8rem; color: var(--gold); text-transform: uppercase;
+    letter-spacing: .14em; font-weight: 700; margin-bottom: 8px;
+  }
+  .cert-top h2 {
+    font-family: 'Playfair Display', serif; font-size: 1.6rem;
+    color: var(--white); margin-bottom: 4px;
+  }
+  .cert-top p { color: rgba(255,255,255,.7); font-size: .9rem; }
+  .cert-body { background: var(--white); padding: 32px 36px; }
+  .cert-body .cert-statement {
+    font-size: 1.05rem; text-align: center; color: var(--navy);
+    line-height: 1.8; margin-bottom: 22px;
+  }
+  .cert-body .cert-statement strong { color: var(--blue); }
+  .cert-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 16px; margin-bottom: 24px;
+  }
+  .cert-field {
+    background: var(--lgrey); border-radius: 8px; padding: 12px 16px;
+  }
+  .cert-field .cf-label { font-size: .72rem; color: #888; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 4px; }
+  .cert-field .cf-value { font-size: .95rem; font-weight: 700; color: var(--navy); }
+  .cert-sig-section {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+    border-top: 2px solid var(--gold); padding-top: 20px;
+  }
+  .cert-sig-box { text-align: center; }
+  .cert-sig-box .sig-label { font-size: .75rem; color: #888; text-transform: uppercase; letter-spacing: .08em; margin-top: 8px; }
+  .cert-sig-img { border-bottom: 2px solid var(--navy); min-height: 60px; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 6px; }
+  .cert-sig-img canvas { max-width: 200px; max-height: 60px; }
+  .cert-footer {
+    background: var(--navy); padding: 12px 24px; text-align: center;
+    font-size: .78rem; color: rgba(255,255,255,.55);
+  }
+
+  /* ── Misc ── */
+  .clause-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 24px; }
+  .mini-clause-card {
+    background: var(--white); border-radius: 9px; padding: 16px 18px;
+    border-left: 4px solid var(--blue); box-shadow: 0 2px 8px rgba(0,0,0,.07);
+  }
+  .mini-clause-card .mc-clause { font-size: .78rem; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 4px; }
+  .mini-clause-card .mc-title { font-size: .97rem; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+  .mini-clause-card .mc-desc { font-size: .87rem; color: var(--dgrey); line-height: 1.5; }
+
+  .section-divider {
+    display: flex; align-items: center; gap: 14px;
+    margin: 30px 0 20px; color: var(--blue); font-weight: 700; font-size: 1.05rem;
+  }
+  .section-divider::before, .section-divider::after {
+    content: ''; flex: 1; height: 2px; background: var(--lblue);
+  }
+
+  .print-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 9px 22px; border-radius: 7px; border: 2px solid var(--blue);
+    background: transparent; cursor: pointer; font-size: .88rem;
+    font-weight: 700; color: var(--blue); transition: all .2s;
+  }
+  .print-btn:hover { background: var(--blue); color: var(--white); }
+
+  .notice {
+    background: #FFF8E1; border-left: 4px solid var(--gold);
+    padding: 12px 16px; border-radius: 0 8px 8px 0; margin-bottom: 20px; font-size: .9rem;
+  }
+
+  @media print {
+    .site-header, .header-nav, .progress-bar-wrap, .nav-tab { display: none !important; }
+    .content { padding: 0; max-width: 100%; }
+    .certificate { display: block !important; box-shadow: none; }
+    body { background: white; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-top">
+    <h1>Genea Biomedx — ISO 13485:2016 Management Training Portal</h1>
+    <span class="badge">Mandatory Training</span>
+  </div>
+  <nav class="header-nav">
+    <div class="nav-tab active" onclick="showSection('intro', this)">Overview</div>
+    <div class="nav-tab" onclick="showSection('sec5', this)">Section 5 — Mgmt Responsibility</div>
+    <div class="nav-tab" onclick="showSection('sec6', this)">Section 6 — Resources</div>
+    <div class="nav-tab" onclick="showSection('quiz', this)">Assessment</div>
+    <div class="nav-tab" onclick="showSection('cert', this)" id="cert-tab" style="display:none">Certificate</div>
+  </nav>
+  <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progress-fill" style="width:25%"></div></div>
+</header>
+
+<div class="content">
+
+  <!-- ══ INTRO ══ -->
+  <div class="section-panel active" id="panel-intro">
+    <div class="hero">
+      <div class="eyebrow">ISO 13485:2016 · Clauses 5.1–5.6 & 6.1–6.3</div>
+      <h1>Management Responsibility &amp; Resource Management</h1>
+      <p>Mandatory training for all Management Review Board members, as required under QSOP5. Complete all four sections and pass the assessment to obtain your digital training certificate.</p>
+      <div class="hero-meta">
+        <div class="meta-item"><span class="meta-label">Pass Mark</span><span class="meta-value">60 / 100</span></div>
+        <div class="meta-item"><span class="meta-label">Questions</span><span class="meta-value">10</span></div>
+        <div class="meta-item"><span class="meta-label">Est. Time</span><span class="meta-value">25–35 min</span></div>
+        <div class="meta-item"><span class="meta-label">Refresh</span><span class="meta-value">At each MR or QSOP5 update</span></div>
+      </div>
+    </div>
+
+    <div class="notice">📋 <strong>Mandatory training:</strong> All Management Review Board members must complete this training and apply a digital signature before attending any Management Review. Training records are retained in the eQMS (DotCompliance).</div>
+
+    <div class="section-divider">Clauses Covered in This Training</div>
+    <div class="clause-grid">
+      <div class="mini-clause-card"><div class="mc-clause">§5.1</div><div class="mc-title">Management Commitment</div><div class="mc-desc">Top management must provide evidence of commitment to QMS — not just intent.</div></div>
+      <div class="mini-clause-card"><div class="mc-clause">§5.2</div><div class="mc-title">Customer Focus</div><div class="mc-desc">Customer and regulatory requirements must be determined and consistently met.</div></div>
+      <div class="mini-clause-card"><div class="mc-clause">§5.3</div><div class="mc-title">Quality Policy</div><div class="mc-desc">Policy must cover all markets, be communicated, and reviewed at each MR.</div></div>
+      <div class="mini-clause-card"><div class="mc-clause">§5.4.1</div><div class="mc-title">Quality Objectives</div><div class="mc-desc">Measurable objectives set at all levels; failures require formal management response.</div></div>
+      <div class="mini-clause-card"><div class="mc-clause">§5.5</div><div class="mc-title">Responsibility &amp; Authority</div><div class="mc-desc">Roles must be documented. Handover via formal Change Control when roles change.</div></div>
+      <div class="mini-clause-card"><div class="mc-clause">§5.6</div><div class="mc-title">Management Review</div><div class="mc-desc">Formal review at planned intervals with all mandatory inputs and documented outputs.</div></div>
+      <div class="mini-clause-card" style="border-left-color:var(--gold)"><div class="mc-clause" style="color:var(--gold)">§6.1</div><div class="mc-title">Provision of Resources</div><div class="mc-desc">Top management must determine and provide resources to implement and maintain the QMS and meet regulatory requirements.</div></div>
+      <div class="mini-clause-card" style="border-left-color:var(--teal)"><div class="mc-clause" style="color:var(--teal)">§6.2</div><div class="mc-title">Human Resources</div><div class="mc-desc">Personnel must be competent; training must be evaluated and recorded in eQMS.</div></div>
+      <div class="mini-clause-card" style="border-left-color:var(--teal)"><div class="mc-clause" style="color:var(--teal)">§6.3</div><div class="mc-title">Infrastructure</div><div class="mc-desc">Maintain ERP, eQMS, and facilities needed for product conformity and QMS integrity.</div></div>
+    </div>
+    <div style="text-align:right; margin-top:10px;">
+      <button class="btn btn-primary" onclick="showSection('sec5', document.querySelectorAll('.nav-tab')[1])">Begin Training →</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 5 ══ -->
+  <div class="section-panel" id="panel-sec5">
+    <div class="card">
+      <div class="card-header"><span class="clause-badge">§5.1</span><h2>Management Commitment</h2></div>
+      <div class="card-body">
+        <p>Top management must provide <strong>evidence</strong> of commitment to developing, implementing, and continually improving the QMS. Commitment is demonstrated through actions — not declarations.</p>
+        <ul>
+          <li>Communicate the importance of meeting customer and regulatory requirements</li>
+          <li>Establish a Quality Policy appropriate to the organisation's purpose</li>
+          <li>Ensure measurable quality objectives are established at all relevant levels</li>
+          <li>Conduct Management Reviews at planned intervals</li>
+          <li><strong>Ensure the availability of resources necessary for the QMS</strong></li>
+        </ul>
+
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><span class="clause-badge">§5.2</span><h2>Customer Focus</h2></div>
+      <div class="card-body">
+        <p>Top management must ensure that customer requirements and applicable regulatory requirements are determined and consistently met. This is not delegated — it requires active management monitoring.</p>
+        <ul>
+          <li>Identify and document customer requirements, including post-delivery requirements</li>
+          <li>Ensure applicable regulatory requirements for each market are identified and met</li>
+          <li>Monitor performance against customer satisfaction data, complaint trends, and quality objectives</li>
+          <li>Take action when customer requirements or quality objectives are not being met</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><span class="clause-badge">§5.3</span><h2>Quality Policy</h2></div>
+      <div class="card-body">
+        <p>The Quality Policy must be appropriate to the organisation's purpose, include a commitment to meeting requirements and continual improvement, and provide a framework for quality objectives. It must be communicated, understood, and reviewed at each Management Review.</p>
+        <p><strong>It must reference ALL markets in which the organisation places devices on the market.</strong></p>
+        <ul>
+          <li>Reviewed and approved by top management at each Management Review</li>
+          <li>Communicated and understood at all levels of the organisation</li>
+          <li>Aligned with regulatory requirements for every jurisdiction in which devices are registered</li>
+          <li>Updated whenever the organisation enters a new market or a regulatory change affects scope</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><span class="clause-badge">§5.4.1</span><h2>Quality Objectives</h2></div>
+      <div class="card-body">
+        <p>Measurable quality objectives must be established at relevant functions and levels. They must be consistent with the quality policy. When an objective is not met, management must formally document a response — recording the failure alone is not sufficient.</p>
+        <ul>
+          <li>Objectives must be <strong>measurable</strong> — expressed as a specific, quantifiable target (e.g. percentage, rate, or threshold)</li>
+          <li>Established at relevant <strong>functions and levels</strong> within the organisation — not only at the corporate level</li>
+          <li>Reviewed at each Management Review with documented performance data</li>
+          <li>Where an objective has not been met, top management must formally document a response — including an analysis of the gap and a committed action or resource decision</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><span class="clause-badge">§5.5</span><h2>Responsibility, Authority &amp; Communication</h2></div>
+      <div class="card-body">
+        <p>Responsibilities and authorities must be defined, documented, and communicated throughout the organisation. When roles change or are eliminated, responsibilities must be formally transferred — not informally assumed.</p>
+        <ul>
+          <li>All QMS roles must have documented responsibilities and authorities</li>
+          <li>The Management Representative must be appointed by top management and must report QMS performance at each Management Review</li>
+          <li>Communication processes for QMS effectiveness must be established throughout the organisation (§5.5.3)</li>
+          <li>When a role that holds QMS responsibilities is changed, eliminated, or handed over, the transfer of those responsibilities must be documented and verified</li>
+          <li>No QMS responsibility should remain unassigned at any time</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><span class="clause-badge">§5.6</span><h2>Management Review — §5.6.1 / §5.6.2 / §5.6.3</h2></div>
+      <div class="card-body">
+        <p>Top management must review the QMS at planned intervals to ensure its continuing suitability, adequacy, and effectiveness. Records must be maintained.</p>
+        <p><strong>§5.6.2 — Required inputs include:</strong></p>
+        <ul>
+          <li>Customer feedback and complaint trends</li>
+          <li>Reporting to regulatory authorities</li>
+          <li>Audit findings (internal and external — including BSI)</li>
+          <li>Monitoring of processes and product conformity</li>
+          <li>Status of corrective and preventive actions (CAPAs)</li>
+          <li>Follow-up actions from previous Management Reviews</li>
+          <li>Planned changes affecting the QMS</li>
+          <li><strong>New or revised regulatory requirements</strong></li>
+          <li>Recommendations for improvement</li>
+        </ul>
+        <p><strong>§5.6.3 — Required outputs:</strong> Decisions on QMS improvements, product improvements, and <strong>resource needs</strong>. Resource decisions made during or after Management Reviews must be documented.</p>
+        <p>Records of Management Reviews must be maintained as QMS records. Minutes must accurately reflect the inputs discussed and the outputs — including any decisions not to act, and the rationale.</p>
+      </div>
+    </div>
+
+    <div style="display:flex; gap:12px; justify-content:flex-end; margin-top:10px;">
+      <button class="btn btn-outline" onclick="showSection('intro', document.querySelectorAll('.nav-tab')[0])">← Back</button>
+      <button class="btn btn-primary" onclick="showSection('sec6', document.querySelectorAll('.nav-tab')[2])">Continue to Section 6 →</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 6 ══ -->
+  <div class="section-panel" id="panel-sec6">
+    <div class="card">
+      <div class="card-header" style="background: var(--teal)"><span class="clause-badge" style="background:var(--navy);color:var(--gold)">§6.1</span><h2>Provision of Resources</h2></div>
+      <div class="card-body">
+        <p><em>"The organization shall determine and provide the resources needed to: (a) implement the quality management system and to maintain its effectiveness; (b) meet applicable regulatory and customer requirements."</em></p>
+        <p>This clause places a direct obligation on top management. Resource decisions cannot be made independently of QMS obligations. The standard does not permit an organisation to operate an inadequately resourced QMS and remain compliant.</p>
+        <ul>
+          <li>Resources include personnel, infrastructure, work environment, and information systems</li>
+          <li>Top management must <strong>determine</strong> what resources are needed — this requires an assessment, not an assumption</li>
+          <li>Before reducing QA/RA resources, management must assess the impact on QMS processes and responsibilities</li>
+          <li>Where resource constraints are identified, a documented escalation pathway must exist so that concerns are formally recorded and acted upon</li>
+          <li>Evidence of resource provision decisions must be retained as QMS records</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header" style="background: var(--teal)"><span class="clause-badge" style="background:var(--navy);color:var(--gold)">§6.2</span><h2>Human Resources &amp; Competency</h2></div>
+      <div class="card-body">
+        <p>Personnel performing QMS work must be <strong>competent</strong> on the basis of appropriate education, training, skills, and experience. The organisation must:</p>
+        <ul>
+          <li><strong>Determine</strong> the competency requirements for each QMS role</li>
+          <li><strong>Provide</strong> training or other actions to achieve the required competence</li>
+          <li><strong>Evaluate</strong> the effectiveness of training — a training attendance record is not sufficient</li>
+          <li><strong>Document</strong> education, training, skills, and experience for all relevant personnel</li>
+        </ul>
+
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header" style="background: var(--teal)"><span class="clause-badge" style="background:var(--navy);color:var(--gold)">§6.3</span><h2>Infrastructure</h2></div>
+      <div class="card-body">
+        <p>The organisation must determine, provide, and maintain the infrastructure needed to achieve product conformity. This includes buildings and workspace, process equipment, and <strong>supporting services including information systems (ERP, eQMS)</strong>.</p>
+        <ul>
+          <li>The eQMS must be maintained and all controlled documents managed within it — uncontrolled document storage is not acceptable for QMS-critical records</li>
+          <li>ERP and other systems must have appropriate access controls — only authorised personnel should be able to assign or change product release status</li>
+          <li>Infrastructure must be regularly reviewed to ensure it continues to support QMS requirements</li>
+          <li>Maintenance plans must be documented and implemented to prevent infrastructure failure affecting product quality or QMS processes</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card" style="border: 2px solid var(--gold);">
+      <div class="card-header" style="background: var(--navy)"><h2 style="color:var(--gold)">QMS Responsibility Matrix — Your Role at a Glance</h2></div>
+      <div class="card-body">
+        <div style="overflow-x:auto;">
+          <table style="width:100%; border-collapse:collapse; font-size:.88rem;">
+            <thead>
+              <tr style="background:var(--navy); color:white;">
+                <th style="padding:10px 12px; text-align:left; border:1px solid #2a4a7a;">QMS Activity</th>
+                <th style="padding:10px 12px; text-align:center; border:1px solid #2a4a7a; width:140px;">CEO / Board</th>
+                <th style="padding:10px 12px; text-align:center; border:1px solid #2a4a7a; width:140px;">COO (Tom)</th>
+              </tr>
+            </thead>
+            <tbody id="raci-tbody"></tbody>
+          </table>
+        </div>
+        <div style="display:flex; gap:14px; flex-wrap:wrap; margin-top:12px; font-size:.8rem;">
+          <span style="background:#FFC000; padding:2px 10px; border-radius:4px; font-weight:700;">A = Accountable</span>
+          <span style="background:#70AD47; color:white; padding:2px 10px; border-radius:4px; font-weight:700;">R = Responsible</span>
+          <span style="background:#ED7D31; color:white; padding:2px 10px; border-radius:4px; font-weight:700;">A/R = Both</span>
+          <span style="background:#BDD7EE; padding:2px 10px; border-radius:4px; font-weight:700;">C = Consulted</span>
+          <span style="background:#F2F2F2; padding:2px 10px; border-radius:4px; font-weight:700;">I = Informed</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex; gap:12px; justify-content:flex-end; margin-top:10px;">
+      <button class="btn btn-outline" onclick="showSection('sec5', document.querySelectorAll('.nav-tab')[1])">← Back</button>
+      <button class="btn btn-primary" onclick="showSection('quiz', document.querySelectorAll('.nav-tab')[3])">Proceed to Assessment →</button>
+    </div>
+  </div>
+
+  <!-- ══ QUIZ ══ -->
+  <div class="section-panel" id="panel-quiz">
+    <div class="notice">📋 <strong>Instructions:</strong> Answer all 10 questions. Each question is worth 10 points. Pass mark is <strong>60/100</strong>. You may refer to the training slides above while answering. Results are shown immediately. If you do not pass, you may retake the assessment.</div>
+
+    <div style="background:var(--white); border-radius:10px; box-shadow:0 2px 12px rgba(0,0,0,.08); overflow:hidden; margin-bottom:24px;">
+      <div class="quiz-header">
+        <h2>ISO 13485:2016 Management &amp; Resource — Assessment</h2>
+        <span class="score-badge" id="live-score">0 / 10 answered</span>
+      </div>
+      <div class="quiz-body" id="quiz-questions"></div>
+    </div>
+
+    <div style="text-align:center; margin-bottom:24px;">
+      <button class="btn btn-gold" id="submit-btn" onclick="submitQuiz()" disabled>Submit Assessment</button>
+    </div>
+
+    <div class="result-panel" id="result-panel">
+      <div class="result-header" id="result-header">
+        <div class="result-icon" id="result-icon"></div>
+        <h2 id="result-title"></h2>
+        <div class="result-score" id="result-score"></div>
+        <div class="result-sub" id="result-sub"></div>
+      </div>
+      <div class="result-body">
+        <p id="result-msg" style="font-size:1rem; margin-bottom:20px;"></p>
+        <div id="sig-section-wrap"></div>
+        <div style="text-align:center; margin-top:16px;">
+          <button class="btn btn-outline" onclick="resetQuiz()" id="retake-btn" style="display:none">↩ Retake Assessment</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ CERT ══ -->
+  <div class="section-panel" id="panel-cert">
+    <div class="certificate" id="certificate">
+      <div class="cert-top">
+        <div class="cert-org">Genea Biomedx Pty Ltd · Quality Management System</div>
+        <h2>Certificate of Training Completion</h2>
+        <p>ISO 13485:2016 — Management Responsibility &amp; Resource Management</p>
+      </div>
+      <div class="cert-body">
+        <p class="cert-statement">This is to certify that <strong id="cert-name">—</strong>, serving as <strong id="cert-role">—</strong>, has successfully completed the mandatory ISO 13485:2016 Management Responsibility and Resource Management training module, achieved a passing score, and has applied their digital signature confirming training completion.</p>
+        <div class="cert-grid">
+          <div class="cert-field"><div class="cf-label">Participant Name</div><div class="cf-value" id="cert-name-2">—</div></div>
+          <div class="cert-field"><div class="cf-label">Score Achieved</div><div class="cf-value" id="cert-score">—</div></div>
+          <div class="cert-field"><div class="cf-label">Date Completed</div><div class="cf-value" id="cert-date">—</div></div>
+          <div class="cert-field"><div class="cf-label">Role / Title</div><div class="cf-value" id="cert-role-2">—</div></div>
+          <div class="cert-field"><div class="cf-label">Clauses Covered</div><div class="cf-value">§5.1–5.6 · §6.1–6.3</div></div>
+          <div class="cert-field"><div class="cf-label">Reference</div><div class="cf-value">QSOP5 · ISO 13485:2016</div></div>
+        </div>
+        <div class="cert-sig-section">
+          <div class="cert-sig-box">
+            <div class="cert-sig-img"><canvas id="cert-sig-canvas" width="200" height="60"></canvas></div>
+            <div class="sig-label">Participant Digital Signature</div>
+          </div>
+          <div class="cert-sig-box">
+            <div class="cert-sig-img" style="align-items:center; justify-content:center;">
+              <div style="text-align:center;">
+                <div style="font-family:'Playfair Display',serif; font-size:1.1rem; color:var(--navy); font-weight:700;">Echo Yu</div>
+                <div style="font-size:.8rem; color:#888;">Global QA/RA Director</div>
+              </div>
+            </div>
+            <div class="sig-label">QA/RA Director Authorisation</div>
+          </div>
+        </div>
+      </div>
+      <div class="cert-footer">This record is stored in the Genea Biomedx eQMS (DotCompliance). Document ref: QSOP5 · Training record must be retained for the lifetime of the QMS per ISO 13485 §4.2.5.</div>
+    </div>
+    <div style="display:flex; gap:12px; justify-content:center; margin-top:20px;">
+      <button class="print-btn" onclick="window.print()">🖨 Print Certificate</button>
+    </div>
+    <p style="text-align:center; margin-top:14px; font-size:.82rem; color:#888;">
+      📧 A training completion notification has been sent to <strong>quality@geneabiomedx.com</strong>
+    </p>
+  </div>
+
+</div><!-- /content -->
+
+<script>
+// ── Navigation ────────────────────────────────────────────────────────────────
+const sections = ['intro','sec5','sec6','quiz','cert'];
+const progress  = {intro:25, sec5:50, sec6:75, quiz:90, cert:100};
+
+function showSection(id, tab) {
+  document.querySelectorAll('.section-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  if (tab) tab.classList.add('active');
+  document.getElementById('progress-fill').style.width = (progress[id] || 25) + '%';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── RACI Table (CEO/Board + COO only) ────────────────────────────────────────
+const raciData = [
+  ["Management Review — convene & chair",             "I",   "A/R"],
+  ["Quality Policy — approve (all markets)",          "A",   "R"  ],
+  ["Resource provision decisions",                    "A",   "A/R"],
+  ["QMS Impact Assessment (pre-redundancy)",          "I",   "A/R"],
+  ["MR Board ISO 13485 training",                     "R",   "R"  ],
+  ["CAPA program oversight",                          "I",   "I"  ],
+  ["PMS reports (PSUR/PMCF/Canada)",                  "I",   "I"  ],
+  ["Regulatory gap analysis (biannual)",              "I",   "I"  ],
+];
+const raciColors = { A:"#FFC000", R:"#70AD47", "A/R":"#ED7D31", C:"#BDD7EE", I:"#F2F2F2" };
+const tbody = document.getElementById('raci-tbody');
+raciData.forEach((row, ri) => {
+  const tr = document.createElement('tr');
+  tr.style.background = ri % 2 ? '#F7FAFD' : '#fff';
+  row.forEach((cell, ci) => {
+    const td = document.createElement('td');
+    td.style.cssText = `padding:9px 12px; border:1px solid #dde4ee; text-align:${ci===0?'left':'center'}; font-size:.87rem;`;
+    if (ci > 0) { td.style.background = raciColors[cell] || '#fff'; td.style.fontWeight = '700'; }
+    td.textContent = cell;
+    tr.appendChild(td);
+  });
+  tbody.appendChild(tr);
+});
+
+// ── Quiz ──────────────────────────────────────────────────────────────────────
+const questions = [
+  { q: "Under ISO 13485 §6.1, which statement best describes top management's obligation regarding resources?",
+    opts: ["Resources should be provided when budget allows",
+           "The organisation must determine and provide resources needed to implement and maintain the QMS",
+           "Resource decisions are the sole responsibility of the QA department",
+           "Resources must be documented but not necessarily provided in full"],
+    ans: 1 },
+  { q: "Which clause requires top management to conduct Management Reviews at planned intervals?",
+    opts: ["Clause 5.4.1 — Quality Objectives",
+           "Clause 6.2 — Human Resources",
+           "Clause 5.6 — Management Review",
+           "Clause 4.2.4 — Document Control"],
+    ans: 2 },
+  { q: "Under revised QSOP5, what must occur BEFORE any QA/RA headcount reduction is approved?",
+    opts: ["A verbal risk assessment by the COO",
+           "A COO-signed QMS Impact Assessment must be completed",
+           "Notification to BSI before proceeding",
+           "A training record update in the eQMS"],
+    ans: 1 },
+  { q: "ISO 13485 §5.6.2 lists required Management Review inputs. Which of the following is NOT a required input?",
+    opts: ["Customer feedback and complaint trends",
+           "Status of corrective and preventive actions",
+           "Staff salary and remuneration data",
+           "New or revised regulatory requirements"],
+    ans: 2 },
+  { q: "What is the pass mark for this training assessment?",
+    opts: ["50 out of 100",
+           "70 out of 100",
+           "80 out of 100",
+           "60 out of 100"],
+    ans: 3 },
+  { q: "Clause 6.2 requires that personnel performing QMS work are competent. Which alone is NOT sufficient evidence of competency?",
+    opts: ["A completed competency assessment with demonstrated proficiency",
+           "A training attendance record only",
+           "Evidence of relevant education, experience and observed performance",
+           "A supervisor sign-off after observed task performance"],
+    ans: 1 },
+  { q: "Under ISO 13485 §6.1, which of the following represents a gap in an organisation's resource management process?",
+    opts: ["Personnel are hired after a formal competency assessment",
+           "Headcount reductions in QA/RA proceed without a documented assessment of the impact on QMS responsibilities",
+           "The Management Representative reports resource needs at each Management Review",
+           "Resource decisions are documented as outputs of the Management Review"],
+    ans: 1 },
+  { q: "Under Clause 5.5, what must happen when a QMS role is eliminated or handed over?",
+    opts: ["Nothing formal — the manager decides informally",
+           "A formal Change Control must be raised and the Management Representative must verify the transfer",
+           "The new person simply starts work and learns on the job",
+           "A BSI notification is required before proceeding"],
+    ans: 1 },
+  { q: "A Quality Objective has not been met for the third consecutive quarter. What does ISO 13485 require?",
+    opts: ["Record the failure and move on to the next review period",
+           "Top management must formally document a response and commit to specific resource or corrective action",
+           "Adjust the quality objective target downward for the next period",
+           "Inform BSI immediately of the failure"],
+    ans: 1 },
+  { q: "Under revised QSOP5, what must a Management Review Board member do when the QA/RA Director formally escalates a resource concern?",
+    opts: ["Respond and document the response within 5 business days",
+           "Acknowledge receipt within 30 calendar days",
+           "Refer it to the QA team to resolve without board involvement",
+           "No formal response is required if the concern is minor"],
+    ans: 0 },
+];
+
+let answers = new Array(questions.length).fill(null);
+let submitted = false;
+let finalScore = 0;
+
+function buildQuiz() {
+  const container = document.getElementById('quiz-questions');
+  container.innerHTML = '';
+  questions.forEach((q, qi) => {
+    const block = document.createElement('div');
+    block.className = 'question-block';
+    block.id = 'q-block-' + qi;
+    block.innerHTML = `
+      <div class="q-number">Question ${qi+1} of ${questions.length}</div>
+      <div class="q-text">${q.q}</div>
+      <div class="options-grid" id="opts-${qi}">
+        ${q.opts.map((opt, oi) => `
+          <button class="option-btn" id="opt-${qi}-${oi}" onclick="selectAnswer(${qi}, ${oi})">${opt}</button>
+        `).join('')}
+      </div>
+      <div class="q-feedback" id="fb-${qi}"></div>
+    `;
+    container.appendChild(block);
+  });
+}
+
+function selectAnswer(qi, oi) {
+  if (submitted) return;
+  answers[qi] = oi;
+  document.querySelectorAll(`#opts-${qi} .option-btn`).forEach((btn, i) => {
+    btn.classList.toggle('selected', i === oi);
+  });
+  const answered = answers.filter(a => a !== null).length;
+  document.getElementById('live-score').textContent = `${answered} / ${questions.length} answered`;
+  document.getElementById('submit-btn').disabled = answered < questions.length;
+}
+
+function submitQuiz() {
+  submitted = true;
+  let correct = 0;
+  questions.forEach((q, qi) => {
+    const userAns = answers[qi];
+    const isCorrect = userAns === q.ans;
+    if (isCorrect) correct++;
+    const block = document.getElementById('q-block-' + qi);
+    block.classList.add(isCorrect ? 'answered-correct' : 'answered-wrong');
+    document.querySelectorAll(`#opts-${qi} .option-btn`).forEach((btn, oi) => {
+      btn.disabled = true;
+      if (oi === q.ans) btn.classList.add('correct');
+      else if (oi === userAns && !isCorrect) btn.classList.add('wrong');
+    });
+    const fb = document.getElementById('fb-' + qi);
+    fb.className = 'q-feedback show ' + (isCorrect ? 'pass' : 'fail');
+    fb.textContent = isCorrect ? '✔ Correct!' : `✘ Incorrect. The correct answer is: "${q.opts[q.ans]}"`;
+  });
+  finalScore = correct * 10;
+  showResult(correct, finalScore);
+}
+
+function showResult(correct, score) {
+  const passed = score >= 60;
+  const panel = document.getElementById('result-panel');
+  const header = document.getElementById('result-header');
+  panel.classList.add('show');
+  header.className = 'result-header ' + (passed ? 'pass-bg' : 'fail-bg');
+  document.getElementById('result-icon').textContent = passed ? '🏆' : '📋';
+  document.getElementById('result-title').textContent = passed ? 'Training Passed!' : 'Not Yet Passed';
+  document.getElementById('result-score').textContent = score + ' / 100';
+  document.getElementById('result-sub').textContent = correct + ' correct out of ' + questions.length + ' questions';
+  document.getElementById('result-msg').textContent = passed
+    ? 'Congratulations! You have met the pass mark of 60/100. Please complete the digital signature below to finalise your training record. Your certificate will be generated automatically.'
+    : 'You scored below the required pass mark of 60/100. Please review the relevant training sections and retake the assessment. There is no limit on retakes.';
+  document.getElementById('retake-btn').style.display = passed ? 'none' : 'inline-flex';
+
+  if (passed) {
+    document.getElementById('sig-section-wrap').innerHTML = buildSigSection();
+    initCanvas();
+    panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } else {
+    panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+function buildSigSection() {
+  const today = new Date().toLocaleDateString('en-AU', { day:'2-digit', month:'long', year:'numeric' });
+  return `
+    <div class="sig-section">
+      <h3>Digital Signature &amp; Training Confirmation <span>✍</span></h3>
+      <p style="font-size:.9rem; margin-bottom:18px; color:var(--dgrey);">By completing and signing below, you confirm that you have reviewed this ISO 13485:2016 training module, understand your obligations as a Management Review Board member, and commit to complying with the requirements of ISO 13485 Sections 5 and 6, and the revised QSOP5.</p>
+      <div class="form-row">
+        <div class="form-group"><label>Full Name *</label><input type="text" id="sig-name" placeholder="Enter your full name" oninput="checkSigReady()"></div>
+        <div class="form-group"><label>Role / Title *</label><input type="text" id="sig-role" placeholder="e.g. Chief Operating Officer" oninput="checkSigReady()"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Department / Company</label><input type="text" id="sig-dept" placeholder="e.g. Genea Biomedx Pty Ltd" oninput="checkSigReady()"></div>
+        <div class="form-group"><label>Date</label><input type="text" id="sig-date" value="${today}" readonly style="background:#f5f5f5;color:#888;"></div>
+      </div>
+      <div class="form-group" style="margin-bottom:10px;"><label>Draw Your Signature Below *</label></div>
+      <div class="sig-canvas-wrap">
+        <canvas id="sig-canvas"></canvas>
+        <div class="sig-canvas-label" id="canvas-placeholder">Draw your signature here with mouse or touch</div>
+      </div>
+      <div class="sig-actions">
+        <button class="btn-clear-sig" onclick="clearSig()">Clear Signature</button>
+        <span style="font-size:.8rem; color:#aaa; margin-left:4px;">Use mouse or touch to draw</span>
+        <button class="btn btn-green" id="confirm-btn" onclick="confirmTraining()" disabled style="margin-left:auto">✔ Confirm &amp; Generate Certificate</button>
+      </div>
+    </div>
+  `;
+}
+
+// ── Canvas signature ──────────────────────────────────────────────────────────
+let drawing = false, hasSig = false;
+
+function initCanvas() {
+  const canvas = document.getElementById('sig-canvas');
+  if (!canvas) return;
+  const wrap = canvas.parentElement;
+  canvas.width  = wrap.clientWidth  || 600;
+  canvas.height = wrap.clientHeight || 130;
+  const ctx = canvas.getContext('2d');
+  ctx.strokeStyle = '#1F3864'; ctx.lineWidth = 2.5;
+  ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+
+  function getPos(e) {
+    const r = canvas.getBoundingClientRect();
+    const src = e.touches ? e.touches[0] : e;
+    return { x: src.clientX - r.left, y: src.clientY - r.top };
+  }
+  function startDraw(e) { e.preventDefault(); drawing = true; const p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); }
+  function draw(e) { if (!drawing) return; e.preventDefault(); const p = getPos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); hasSig = true; document.getElementById('canvas-placeholder').style.opacity = '0'; checkSigReady(); }
+  function endDraw(e) { e.preventDefault(); drawing = false; }
+
+  canvas.addEventListener('mousedown', startDraw);
+  canvas.addEventListener('mousemove', draw);
+  canvas.addEventListener('mouseup', endDraw);
+  canvas.addEventListener('mouseleave', endDraw);
+  canvas.addEventListener('touchstart', startDraw, { passive: false });
+  canvas.addEventListener('touchmove', draw, { passive: false });
+  canvas.addEventListener('touchend', endDraw, { passive: false });
+}
+
+function clearSig() {
+  const canvas = document.getElementById('sig-canvas');
+  if (!canvas) return;
+  canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+  hasSig = false;
+  document.getElementById('canvas-placeholder').style.opacity = '1';
+  checkSigReady();
+}
+
+function checkSigReady() {
+  const name = (document.getElementById('sig-name') || {}).value || '';
+  const role = (document.getElementById('sig-role') || {}).value || '';
+  const btn  = document.getElementById('confirm-btn');
+  if (btn) btn.disabled = !(name.trim() && role.trim() && hasSig);
+}
+
+// ── EmailJS ───────────────────────────────────────────────────────────────────
+// To activate email notifications:
+// 1. Sign up free at https://www.emailjs.com
+// 2. Create a service (Gmail / Outlook etc.) → copy Service ID below
+// 3. Create an Email Template with variables: {{trainee_name}}, {{trainee_role}},
+//    {{result}}, {{score}}, {{date}}, {{to_email}}
+// 4. Copy Template ID and Public Key below
+const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';   // e.g. 'service_abc123'
+const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';  // e.g. 'template_xyz789'
+const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';   // e.g. 'AbCdEfGhIjKlMnOp'
+const NOTIFY_EMAIL        = 'quality@geneabiomedx.com';
+
+// Initialise EmailJS (runs once on page load)
+(function() {
+  if (typeof emailjs !== 'undefined') {
+    emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+  }
+})();
+
+async function sendNotificationEmail(name, role, score, passed, date) {
+  if (typeof emailjs === 'undefined') {
+    console.warn('EmailJS not loaded — email notification skipped.');
+    return;
+  }
+  // Validate that keys have been configured
+  if (EMAILJS_PUBLIC_KEY === 'YOUR_PUBLIC_KEY') {
+    console.warn('EmailJS keys not configured — showing mailto fallback.');
+    // Fallback: open mailto so QA can still be notified manually
+    const subject = encodeURIComponent(`ISO 13485 Training Result — ${name} — ${passed ? 'PASS' : 'FAIL'}`);
+    const body    = encodeURIComponent(
+      `ISO 13485:2016 Management Training Result\n\n` +
+      `Trainee Name:  ${name}\n` +
+      `Role / Title:  ${role}\n` +
+      `Result:        ${passed ? 'PASS' : 'FAIL'}\n` +
+      `Score:         ${score} / 100\n` +
+      `Date:          ${date}\n\n` +
+      `This notification was generated automatically by the ISO 13485 Training Portal.`
+    );
+    window.open(`mailto:${NOTIFY_EMAIL}?subject=${subject}&body=${body}`);
+    return;
+  }
+  try {
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+      to_email:      NOTIFY_EMAIL,
+      trainee_name:  name,
+      trainee_role:  role,
+      result:        passed ? 'PASS ✔' : 'FAIL ✘',
+      score:         score + ' / 100',
+      date:          date,
+      reply_to:      NOTIFY_EMAIL,
+    });
+    console.log('Notification email sent to', NOTIFY_EMAIL);
+  } catch(err) {
+    console.error('EmailJS send failed:', err);
+    // Silent fail — don't block certificate generation
+  }
+}
+
+function confirmTraining() {
+  const name   = document.getElementById('sig-name').value.trim();
+  const role   = document.getElementById('sig-role').value.trim();
+  const date   = document.getElementById('sig-date').value;
+  const canvas = document.getElementById('sig-canvas');
+  const passed = finalScore >= 60;
+
+  // Build certificate
+  document.getElementById('cert-name').textContent   = name;
+  document.getElementById('cert-name-2').textContent = name;
+  document.getElementById('cert-role').textContent   = role;
+  document.getElementById('cert-role-2').textContent = role;
+  document.getElementById('cert-score').textContent  = finalScore + ' / 100';
+  document.getElementById('cert-date').textContent   = date;
+
+  // Copy signature to certificate canvas
+  const certCanvas = document.getElementById('cert-sig-canvas');
+  const certCtx    = certCanvas.getContext('2d');
+  certCtx.clearRect(0, 0, certCanvas.width, certCanvas.height);
+  if (canvas) certCtx.drawImage(canvas, 0, 0, certCanvas.width, certCanvas.height);
+
+  // Show certificate tab
+  document.getElementById('certificate').classList.add('show');
+  document.getElementById('cert-tab').style.display = 'block';
+  showSection('cert', document.getElementById('cert-tab'));
+
+  // Send email notification to QA team
+  sendNotificationEmail(name, role, finalScore, passed, date);
+}
+
+function resetQuiz() {
+  answers = new Array(questions.length).fill(null);
+  submitted = false; hasSig = false;
+  document.getElementById('result-panel').classList.remove('show');
+  document.getElementById('live-score').textContent = '0 / 10 answered';
+  document.getElementById('submit-btn').disabled = true;
+  buildQuiz();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+buildQuiz();
+</script>
+</body>
+</html>
